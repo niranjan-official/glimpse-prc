@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Loading from "./Loading";
 import { getAllData, getFinalList, sortNeededData } from "../functions";
 import Screen from "./Screen";
+import Refresh from "./Refresh";
 
 const Layout = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -33,6 +34,7 @@ const Layout = () => {
     return (
       <div className="h-screen w-full bg-black">
         <Screen list={mediaList} interval={interval} />
+        <Refresh/>
       </div>
     );
   }
