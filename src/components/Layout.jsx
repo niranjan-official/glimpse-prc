@@ -6,11 +6,15 @@ import Refresh from "./Refresh";
 
 const Layout = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const [fetchLoad, setFetchLoad] = useState(true);
   const [mediaList, setMediaList] = useState("");
   const [interval, setInterval] = useState(0);
 
   useEffect(() => {
     getData();
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
   }, []);
 
   const getData = async () => {
@@ -24,11 +28,11 @@ const Layout = () => {
     console.log(finalMediaList);
 
     setMediaList(finalMediaList);
-    setIsLoading(false);
+    setFetchLoad(false);
     setInterval(sortedData.carouselInterval);
   };
 
-  if (isLoading) {
+  if (isLoading || fetchLoad) {
     return <Loading />;
   } else {
     return (
