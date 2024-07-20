@@ -7,13 +7,12 @@ import {
 import Autoplay from "embla-carousel-autoplay";
 
 const Screen = ({ list, interval = 2 }) => {
-  console.log(interval);
   return (
     <div className="flex h-full w-full items-center justify-center">
       <Carousel
         plugins={[
           Autoplay({
-            delay: interval*1000,
+            delay: interval * 1000,
           }),
         ]}
         opts={{
@@ -23,7 +22,22 @@ const Screen = ({ list, interval = 2 }) => {
         <CarouselContent>
           {list.map((media, index) => (
             <CarouselItem key={index}>
-              <img className="h-screen w-auto" src={media.data.imgSrc} alt="" />
+              {media.data.mediaType === "image" ? (
+                <img
+                  className="h-screen w-auto"
+                  src={media.data.mediaSrc}
+                  alt=""
+                />
+              ) : media.data.mediaType === "video" ? (
+                <video
+                  className="h-screen w-auto"
+                  src={media.data.mediaSrc}
+                  autoPlay
+                  muted
+                  playsInline
+                  loop
+                />
+              ) : null}
             </CarouselItem>
           ))}
         </CarouselContent>
